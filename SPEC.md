@@ -1,6 +1,6 @@
 # URL Shortener Specification
 
-In this task, you will be building a **URL shortener** during a pair programming session.
+In this task, you'll design and implement a **URL shortener** while leading the solution, with the interviewer available to prompt, guide, and ask questions as needed.
 
 To succeed, please familiarize yourself with the problem ahead of time, do some design thinking, and be prepared. The code will be made available **before the interview**, so take this opportunity to understand the expected functionality and system design considerations.
 
@@ -62,7 +62,7 @@ Redirects the user to the original URL. If the code doesn't exist, return a 404 
 - Optimize for performance (if relevant).
 
 ## 4. Logistics
-- Estimated time: **2 hours** (pair programming format).
+– Estimated time: **90 minutes** (you'll lead the coding, but the interviewer may prompt, unblock or ask questions as needed).
 - Submission: A **GitHub URL**, a **Git bundle**, or another suitable format.
 
 > **Note:**  

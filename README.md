@@ -2,7 +2,9 @@
 
 This repository contains a stub implementation of a simple URL shortener application, used as part of our software engineering interview exercise.
 
-The exercise is conducted as a pair programming session (approximately 2 hours), where the candidate is expected to:
+The exercise is designed to last approximately 90 minutes and is not a strict pair programming session. The candidate is expected to lead the implementation, while the interviewer may prompt, guide, and ask questions as needed. The focus is on assessing problem-solving ability, system design thinking, implementation skills, and communication.
+
+During the session, the candidate is expected to:
 - Implement a backend service that accepts long URLs and generates short codes.
 - Handle redirects for short codes.
 - Discuss design decisions, edge cases, and scaling considerations.
