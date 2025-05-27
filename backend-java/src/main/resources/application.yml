@@ -1,3 +1,10 @@
 spring:
   application:
     name: url-shortener-backend
+
+app:
+  short-links:
+    length: 7
+    save-retries: 5
+  public:
+    base-url: http://localhost:8080
