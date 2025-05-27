@@ -7,12 +7,12 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class BackendJavaApplication
+public class UrlShortenerApplication
 {
 
     public static void main(String[] args)
     {
-        SpringApplication.run(BackendJavaApplication.class, args);
+        SpringApplication.run(UrlShortenerApplication.class, args);
     }
 
     @Bean

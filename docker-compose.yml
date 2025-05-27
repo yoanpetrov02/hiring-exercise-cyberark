@@ -1,11 +1,23 @@
 version: "3.8"
 services:
+  database:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
+      - CASSANDRA_DC=datacenter1
+    volumes:
+      - cassandra-data:/var/lib/cassandra
   backend:
     build: ./backend-java
     ports:
       - "8080:8080"
     volumes:
       - "${PWD}/backend-java:${PWD}/backend-java"
+    depends_on:
+      - database
   frontend:
     build: ./frontend
     working_dir: ${PWD}/frontend
@@ -15,3 +27,5 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+volumes:
+  cassandra-data:
