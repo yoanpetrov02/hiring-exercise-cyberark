@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UrlShortenerController
 {
-    private final UrlShortenerService urlShortenerService;
-    private final String              baseUrl;
+    private final LinkValidationService linkValidationService;
+    private final UrlShortenerService   urlShortenerService;
+    private final String                baseUrl;
 
-    public UrlShortenerController(UrlShortenerService urlShortenerService,
+    public UrlShortenerController(LinkValidationService linkValidationService,
+                                  UrlShortenerService urlShortenerService,
                                   @Value("${app.public.base-url}") String baseUrl)
     {
+        this.linkValidationService = linkValidationService;
         this.urlShortenerService = urlShortenerService;
         this.baseUrl = baseUrl;
     }
@@ -26,6 +29,9 @@ public class UrlShortenerController
     @PostMapping("/api/shorten")
     public ResponseEntity<?> shortenUrl(@RequestBody ShorteningRequest shorteningRequest)
     {
+        if (!linkValidationService.validateUrl(shorteningRequest.url())) {
+            return new ResponseEntity<>("Invalid link", HttpStatus.BAD_REQUEST);
+        }
         String shortCode = urlShortenerService.createShortLink(shorteningRequest.url());
         if (shortCode == null) {
             return new ResponseEntity<>("Could not generate short URL", HttpStatus.INTERNAL_SERVER_ERROR);
