@@ -39,7 +39,7 @@ docker compose up --build
 ```json
 {
     "short_code": "abc123",
-    "short_url": "http://localhost:5000/abc123",
+    "short_url": "http://localhost:8080/abc123",
     "original_url": "https://www.example.com/very/long/path"
 }
 ```
