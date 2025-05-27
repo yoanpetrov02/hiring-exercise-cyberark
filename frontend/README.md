@@ -20,5 +20,5 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 - **Validate a shortened URL** (see status code, headers, and response data).
 
 ## Development Notes
-- The frontend expects a backend service running on `http://localhost:5000`.
+- The frontend expects a backend service running on `http://localhost:8080`.
 - Update `proxy` in `package.json` if needed.

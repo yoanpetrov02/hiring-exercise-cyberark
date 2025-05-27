@@ -1,13 +1,11 @@
 version: "3.8"
 services:
   backend:
-    command: uvicorn main:app --reload --host 0.0.0.0 --port 5000
-    build: ./backend
-    working_dir: ${PWD}/backend
+    build: ./backend-java
     ports:
-      - "5000:5000"
+      - "8080:8080"
     volumes:
-      - "${PWD}/backend:${PWD}/backend"
+      - "${PWD}/backend-java:${PWD}/backend-java"
   frontend:
     build: ./frontend
     working_dir: ${PWD}/frontend

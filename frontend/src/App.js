@@ -35,7 +35,7 @@ function App() {
 
     try {
       setError("");
-      const response = await axios.post("http://localhost:5000/api/shorten", { url });
+      const response = await axios.post("http://localhost:8080/api/shorten", { url });
       const { short_url, original_url } = response.data;
 
       setShortUrl(short_url);
