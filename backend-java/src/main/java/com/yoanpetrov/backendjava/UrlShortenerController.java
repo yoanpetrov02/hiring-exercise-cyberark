@@ -24,15 +24,15 @@ public class UrlShortenerController
     }
 
     @PostMapping("/api/shorten")
-    public ResponseEntity<?> shortenUrl(@RequestBody String url)
+    public ResponseEntity<?> shortenUrl(@RequestBody ShorteningRequest shorteningRequest)
     {
-        String shortCode = urlShortenerService.createShortLink(url);
+        String shortCode = urlShortenerService.createShortLink(shorteningRequest.url());
         if (shortCode == null) {
             return new ResponseEntity<>("Could not generate short URL", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(new ShorteningResponse(shortCode,
                                                            "%s/%s".formatted(baseUrl, shortCode),
-                                                           url),
+                                                           shorteningRequest.url()),
                                     HttpStatus.CREATED);
     }
 
@@ -45,6 +45,6 @@ public class UrlShortenerController
         }
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.LOCATION, originalUrl);
-        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 }
