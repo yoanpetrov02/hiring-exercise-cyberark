@@ -36,13 +36,13 @@ function App() {
     try {
       setError("");
       const response = await axios.post("http://localhost:8080/api/shorten", { url });
-      const { short_url, original_url } = response.data;
+      const { shortUrl, originalUrl } = response.data;
 
-      setShortUrl(short_url);
-      setOriginalUrl(original_url);
+      setShortUrl(shortUrl);
+      setOriginalUrl(originalUrl);
 
       // Update recent URLs, keeping max 10 entries
-      const updatedUrls = [{ original: original_url, short: short_url }, ...recentUrls].slice(0, 10);
+      const updatedUrls = [{ original: originalUrl, short: shortUrl }, ...recentUrls].slice(0, 10);
       setRecentUrls(updatedUrls);
       localStorage.setItem("recentUrls", JSON.stringify(updatedUrls));
 

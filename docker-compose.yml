@@ -10,6 +10,12 @@ services:
       - CASSANDRA_DC=datacenter1
     volumes:
       - cassandra-data:/var/lib/cassandra
+    healthcheck:
+      test: [ "CMD-SHELL", "cqlsh --username admin --password admin -e 'describe cluster' || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
   backend:
     build: ./backend-java
     ports:
@@ -17,7 +23,8 @@ services:
     volumes:
       - "${PWD}/backend-java:${PWD}/backend-java"
     depends_on:
-      - database
+      database:
+        condition: service_healthy
   frontend:
     build: ./frontend
     working_dir: ${PWD}/frontend

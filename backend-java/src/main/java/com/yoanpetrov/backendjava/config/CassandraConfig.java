@@ -13,7 +13,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration
     @Override
     public String getContactPoints()
     {
-        return "127.0.0.1";
+        return "database";
     }
 
     @Override
