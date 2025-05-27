@@ -12,7 +12,10 @@ public class UrlShortenerApplication
 
     public static void main(String[] args)
     {
-        SpringApplication.run(UrlShortenerApplication.class, args);
+        var context = SpringApplication.run(UrlShortenerApplication.class, args);
+        LinkDao dao = context.getBean("linkDao", LinkDao.class);
+        System.out.println(dao.saveLink("asd", "original url"));
+        System.out.println(dao.saveLink("asd", "original url 2"));
     }
 
     @Bean

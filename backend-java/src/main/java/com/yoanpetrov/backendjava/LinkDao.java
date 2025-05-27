@@ -12,7 +12,7 @@ import java.util.Optional;
 public class LinkDao
 {
     private static final String SAVE_LINK_QUERY =
-            "INSERT INTO links (short_url, original_url, created_at) VALUES (?, ?, ?)";
+            "INSERT INTO links (short_url, original_url, created_at) VALUES (?, ?, ?) IF NOT EXISTS";
 
     private static final String FIND_LINK_QUERY =
             "SELECT original_url FROM links WHERE short_url = ?";
@@ -27,15 +27,16 @@ public class LinkDao
     public boolean saveLink(String shortUrl, String originalUrl)
     {
         Instant createdAt = Instant.now();
-        return cqlTemplate.execute(SAVE_LINK_QUERY, shortUrl, originalUrl, createdAt);
+        ResultSet resultSet = cqlTemplate.queryForResultSet(SAVE_LINK_QUERY, shortUrl, originalUrl, createdAt);
+        Row row = resultSet.one();
+        return row != null && row.getBoolean("[applied]");
     }
 
     public Optional<String> findOriginalUrlByShortUrl(String shortUrl)
     {
         ResultSet resultSet = cqlTemplate.queryForResultSet(FIND_LINK_QUERY, shortUrl);
         Row row = resultSet.one();
-        if (row != null)
-        {
+        if (row != null) {
             return Optional.ofNullable(row.getString("original_url"));
         }
         return Optional.empty();
